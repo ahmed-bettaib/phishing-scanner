@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PhishGuard — Scanner d'URLs</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="app">
+        <header class="app-header">
+            <div class="logo">
+                <span class="logo-icon">🛡️</span>
+                <span class="logo-text">Phish<span class="accent">Guard</span></span>
+            </div>
+            <p class="tagline">Analyse heuristique d'URLs suspectes</p>
+        </header>
+
+        <main class="app-main">
+            <section class="scan-panel">
+                <form id="scan-form" autocomplete="off">
+                    <input
+                        type="text"
+                        id="url-input"
+                        placeholder="Collez une URL à analyser (ex: http://exemple-suspect.com)"
+                        required
+                    >
+                    <button type="submit" id="scan-btn">Analyser</button>
+                </form>
+                <p id="error-msg" class="error-msg"></p>
+            </section>
+
+            <section id="result-panel" class="result-panel hidden">
+                <div class="gauge-wrapper">
+                    <svg viewBox="0 0 200 120" class="gauge">
+                        <path class="gauge-track" d="M10,110 A90,90 0 0,1 190,110" />
+                        <path id="gauge-fill" class="gauge-fill" d="M10,110 A90,90 0 0,1 190,110" />
+                    </svg>
+                    <div class="gauge-score">
+                        <span id="score-value">0</span>
+                        <span class="score-max">/100</span>
+                    </div>
+                </div>
+
+                <div class="verdict">
+                    <span id="risk-badge" class="risk-badge"></span>
+                    <span id="scanned-domain" class="scanned-domain"></span>
+                </div>
+
+                <ul id="reasons-list" class="reasons-list"></ul>
+            </section>
+
+            <section class="history-panel">
+                <h2>Historique des scans</h2>
+                <div id="history-list" class="history-list"></div>
+            </section>
+        </main>
+
+        <footer class="app-footer">
+            <p>Projet pédagogique — analyse heuristique locale, ne remplace pas un outil de threat intelligence.</p>
+        </footer>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/scanner.js') }}"></script>
+</body>
+</html>
