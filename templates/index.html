@@ -14,6 +14,10 @@
                 <span class="logo-text">Phish<span class="accent">Guard</span></span>
             </div>
             <p class="tagline">Analyse heuristique d'URLs suspectes</p>
+            <nav class="module-nav">
+                <a href="{{ url_for('main.index') }}" class="active">Scanner phishing</a>
+                <a href="{{ url_for('main.logs_page') }}">Analyseur de logs</a>
+            </nav>
         </header>
 
         <main class="app-main">

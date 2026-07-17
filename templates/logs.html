@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PhishGuard — Analyseur de logs</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="app">
+        <header class="app-header">
+            <div class="logo">
+                <span class="logo-icon">🛡️</span>
+                <span class="logo-text">Phish<span class="accent">Guard</span></span>
+            </div>
+            <p class="tagline">Analyseur de logs — détection brute force</p>
+            <nav class="module-nav">
+                <a href="{{ url_for('main.index') }}">Scanner phishing</a>
+                <a href="{{ url_for('main.logs_page') }}" class="active">Analyseur de logs</a>
+            </nav>
+        </header>
+
+        <main class="app-main">
+            <section class="scan-panel">
+                <p class="panel-hint">
+                    Colle le contenu d'un fichier de log (format auth.log / sshd) ci-dessous,
+                    ou charge l'exemple pour tester.
+                </p>
+                <textarea id="log-input" rows="10" placeholder="Jul 16 22:10:01 server sshd[1201]: Failed password for root from 41.230.12.5 port 51201 ssh2"></textarea>
+
+                <div class="log-controls">
+                    <label>Seuil (tentatives) <input type="number" id="threshold" value="5" min="1"></label>
+                    <label>Fenêtre (secondes) <input type="number" id="window" value="300" min="10"></label>
+                </div>
+
+                <div class="log-buttons">
+                    <button id="load-sample-btn" type="button">Charger l'exemple</button>
+                    <button id="analyze-log-btn" type="button">Analyser</button>
+                </div>
+                <p id="log-error" class="error-msg"></p>
+            </section>
+
+            <section id="log-result-panel" class="result-panel hidden">
+                <p id="log-summary" class="log-summary"></p>
+                <div id="incidents-list" class="incidents-list"></div>
+            </section>
+
+            <section class="history-panel">
+                <h2>Alertes envoyées récemment</h2>
+                <div id="alerts-list" class="history-list"></div>
+            </section>
+        </main>
+
+        <footer class="app-footer">
+            <p>Module pédagogique — détection heuristique locale, ne remplace pas un vrai SIEM.</p>
+        </footer>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/logs.js') }}"></script>
+</body>
+</html>
